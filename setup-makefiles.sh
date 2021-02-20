@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Copyright (C) 2018 The LineageOS Project
-# Copyright (C) 2020 Project 404
+# Copyright (C) 2019 The Paranoid Android Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,10 +18,10 @@
 
 set -e
 
-DEVICE=raphael
+DEVICE=cepheus
 VENDOR=xiaomi
 
-INITIAL_COPYRIGHT_YEAR=2020
+INITIAL_COPYRIGHT_YEAR=2019
 
 # Load extract_utils and do some sanity checks
 MY_DIR="${BASH_SOURCE%/*}"

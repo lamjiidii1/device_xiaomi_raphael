@@ -22,7 +22,8 @@
 
 #include <fstream>
 
-#define GREEN_LED       "/sys/class/leds/green/"  //Left LED
+#define LCD_LED         "/sys/class/backlight/panel0-backlight/"
+#define WHITE_LED       "/sys/class/leds/white/"
 
 #define BREATH          "breath"
 #define BRIGHTNESS      "brightness"
@@ -71,11 +72,10 @@ static uint32_t getBrightness(const LightState& state) {
 }
 
 static inline uint32_t scaleBrightness(uint32_t brightness, uint32_t maxBrightness) {
-
     if (brightness == 0) {
         return 0;
     }
-    
+
     return (brightness - 1) * (maxBrightness - 1) / (0xFF - 1) + 1;
 }
 
@@ -83,16 +83,19 @@ static inline uint32_t getScaledBrightness(const LightState& state, uint32_t max
     return scaleBrightness(getBrightness(state), maxBrightness);
 }
 
+static void handleBacklight(const LightState& state) {
+    uint32_t brightness = getScaledBrightness(state, MAX_LCD_BRIGHTNESS);
+    set(LCD_LED BRIGHTNESS, brightness);
+}
 
 static void handleNotification(const LightState& state) {
-    uint32_t greenBrightness = getScaledBrightness(state, MAX_LED_BRIGHTNESS);
+    uint32_t whiteBrightness = getScaledBrightness(state, MAX_LED_BRIGHTNESS);
 
     /* Disable breathing or blinking */
+    set(WHITE_LED BREATH, 0);
+    set(WHITE_LED BRIGHTNESS, 0);
 
-    set(GREEN_LED BREATH, 0);
-    set(GREEN_LED BRIGHTNESS, 0);
-
-	if (!greenBrightness) {
+    if (!whiteBrightness) {
         return;
     }
 
@@ -100,11 +103,11 @@ static void handleNotification(const LightState& state) {
         case Flash::HARDWARE:
         case Flash::TIMED:
             /* Breathing */
-            set(GREEN_LED BREATH, 1);
+            set(WHITE_LED BREATH, 1);
             break;
         case Flash::NONE:
         default:
-            set(GREEN_LED BRIGHTNESS, greenBrightness);
+            set(WHITE_LED BRIGHTNESS, whiteBrightness);
     }
 }
 
@@ -128,6 +131,7 @@ static std::vector<LightBackend> backends = {
     { Type::ATTENTION, handleNotification },
     { Type::NOTIFICATIONS, handleNotification },
     { Type::BATTERY, handleNotification },
+    { Type::BACKLIGHT, handleBacklight },
 };
 
 static LightStateHandler findHandler(Type type) {

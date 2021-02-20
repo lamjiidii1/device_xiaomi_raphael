@@ -12,6 +12,7 @@ persist.vendor.audio.fluence.voicecomm=true
 persist.vendor.audio.fluence.voicerec=true
 persist.vendor.audio.ras.enabled=false
 persist.vendor.audio.voicecall.speaker.stereo=true
+persist.vendor.audio_hal.dsp_bit_width_enforce_mode=24
 ro.af.client_heap_size_kbyte=7168
 ro.config.media_vol_steps=25
 ro.config.vc_call_vol_steps=7
@@ -77,7 +78,8 @@ vendor.audio.feature.wsa.enable=false
 vendor.audio.flac.sw.decoder.24bit=true
 vendor.audio.hal.output.suspend.supported=false
 vendor.audio.hw.aac.encoder=false
-vendor.audio.offload.buffer.size.kb=32
+vendor.audio.offload.buffer.size.kb=256
+vendor.audio.hal.boot.timeout.ms=20000
 vendor.audio.offload.gapless.enabled=true
 vendor.audio.offload.multiaac.enable=true
 vendor.audio.offload.multiple.enabled=false
@@ -98,6 +100,10 @@ vendor.audio_hal.period_size=192
 persist.bluetooth.a2dp_offload.cap=sbc-aac-aptx-aptxhd-ldac
 persist.bluetooth.a2dp_offload.disabled=false
 persist.vendor.bt.aac_frm_ctl.enabled=false
+persist.vendor.btstack.a2dp_offload_cap=sbc-aptx-aptxtws-aptxhd-aptxadaptive-aac-ldac
+persist.vendor.btstack.connect.peer_earbud=true
+persist.vendor.btstack.enable.twsplus=true
+persist.vendor.btstack.enable.twsplussho=true
 persist.vendor.qcom.bluetooth.a2dp_offload_cap=sbc-aptx-aptxtws-aptxhd-aac-ldac-aptxadaptive
 persist.vendor.qcom.bluetooth.aac_frm_ctl.enabled=true
 persist.vendor.qcom.bluetooth.enable.splita2dp=true
@@ -140,6 +146,9 @@ persist.dbg.wfc_avail_ovr=1
 # Memory
 ro.vendor.qti.va_aosp.support=1
 
+#Media
+media.settings.xml=/vendor/etc/media_profiles_vendor.xml
+
 # Property to enable/disable PASR
 vendor.power.pasr.enabled=true
 
@@ -166,6 +175,9 @@ persist.vendor.radio.sib16_support=1
 # Sensors
 persist.vendor.sensors.enable.mag_filter=true
 persist.vendor.uspsensor=default
+
+# SSR
+persist.vendor.ssr.restart_level=ALL_ENABLE
 
 # SurfaceFlinger
 debug.sf.use_phase_offsets_as_durations=1
