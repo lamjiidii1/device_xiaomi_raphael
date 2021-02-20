@@ -12,6 +12,7 @@ persist.vendor.audio.fluence.voicecomm=true
 persist.vendor.audio.fluence.voicerec=true
 persist.vendor.audio.ras.enabled=false
 persist.vendor.audio.voicecall.speaker.stereo=true
+persist.vendor.audio_hal.dsp_bit_width_enforce_mode=24
 ro.af.client_heap_size_kbyte=7168
 ro.config.media_vol_steps=25
 ro.config.vc_call_vol_steps=7
@@ -77,7 +78,8 @@ vendor.audio.feature.wsa.enable=false
 vendor.audio.flac.sw.decoder.24bit=true
 vendor.audio.hal.output.suspend.supported=false
 vendor.audio.hw.aac.encoder=false
-vendor.audio.offload.buffer.size.kb=32
+vendor.audio.offload.buffer.size.kb=256
+vendor.audio.hal.boot.timeout.ms=20000
 vendor.audio.offload.gapless.enabled=true
 vendor.audio.offload.multiaac.enable=true
 vendor.audio.offload.multiple.enabled=false
@@ -101,21 +103,32 @@ persist.vendor.bt.aac_frm_ctl.enabled=false
 persist.vendor.qcom.bluetooth.a2dp_offload_cap=sbc-aptx-aptxtws-aptxhd-aac-ldac-aptxadaptive
 persist.vendor.qcom.bluetooth.aac_frm_ctl.enabled=true
 persist.vendor.qcom.bluetooth.enable.splita2dp=true
-persist.vendor.qcom.bluetooth.twsp_state.enabled=true
+persist.vendor.qcom.bluetooth.twsp_state.enabled=false
 ro.bluetooth.a2dp_offload.supported=true
 vendor.qcom.bluetooth.soc=cherokee
 
 # Camera
 persist.camera.gyro.disable=0
 camera.disable_zsl_mode=true
-	
+
 # Data modules
 persist.vendor.data.mode=concurrent
 persist.vendor.data.iwlan.enable=true
-	
+
 # Display
+vendor.display.comp_mask=0
+vendor.display.dataspace_saturation_matrix=1.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,1.0
+vendor.display.disable_decimation=1
+vendor.display.disable_excl_rect=0
+vendor.display.disable_hw_recovery_dump=1
+vendor.display.disable_inline_rotator=1
+vendor.display.disable_scaler=0
+vendor.display.disable_ui_3d_tonemap=1
+vendor.display.enable_default_color_mode=1
+vendor.display.enable_null_display=0
+vendor.display.enable_optimize_refresh=1
 debug.hwui.renderer=skiavk
-	
+
 # FRP
 ro.frp.pst=/dev/block/bootdevice/by-name/frp
 
@@ -126,12 +139,16 @@ ro.vendor.qti.va_odm.support=1
 vendor.gatekeeper.disable_spu=true
 
 # Graphics
+debug.egl.hw=0
+debug.mdpcomp.logs=0
 debug.sf.enable_hwc_vds=1
+debug.sf.hw=0
 debug.sf.latch_unsignaled=1
 ro.hardware.egl=adreno
 ro.opengles.version=196610
 ro.hardware.vulkan=adreno
-	
+vendor.gralloc.disable_ubwc=0
+
 # IMS
 persist.dbg.volte_avail_ovr=1
 persist.dbg.vt_avail_ovr=1
@@ -147,13 +164,6 @@ vendor.power.pasr.enabled=true
 ro.vendor.extension_library=libqti-perfd-client.so
 
 # RIL
-persist.radio.apm_sim_not_pwdn=1
-persist.radio.dynamic_sar=false
-persist.radio.multisim.config=dsds
-persist.radio.NO_STAPA=1
-persist.radio.sar_sar_sensor=true
-persist.radio.VT_HYBRID_ENABLE=1
-persist.sys.fflag.override.settings_network_and_internet_v2=true
 persist.vendor.radio.apm_sim_not_pwdn=1
 persist.vendor.radio.custom_ecc=1
 persist.vendor.radio.enableadvancedscan=
@@ -175,3 +185,6 @@ debug.sf.early.sf.duration=21000000
 debug.sf.early.app.duration=16500000
 debug.sf.earlyGl.sf.duration=13500000
 debug.sf.earlyGl.app.duration=21000000
+
+# Target specific Netflix custom property
+ro.netflix.bsp_rev=Q855-16947-1
