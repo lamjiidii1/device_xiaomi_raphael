@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
 /*
-** Copyright 2020, Lucid Project
+** Copyright 2020, Project 404
 **
 ** Licensed under the Apache License, Version 2.0 (the "License");
 ** you may not use this file except in compliance with the License.
@@ -22,8 +22,4 @@
 <resources>
     <!-- Whether usage of the proximity sensor during doze is supported -->
     <bool name="doze_proximity_sensor_supported">false</bool>
-
-    <!-- Allow devices to hide black gradient behind QS Panel -->
-    <bool name="config_hideQSBlackGradient">true</bool>
-
 </resources>

@@ -106,6 +106,16 @@
         <fqname>@2.0::IGnss/default</fqname>
     </hal>
     <hal format="hidl">
+        <name>android.hardware.ir</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IConsumerIr</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@1.0::IConsumerIr/default</fqname>
+    </hal>
+    <hal format="hidl">
         <name>android.hardware.keymaster</name>
         <transport>hwbinder</transport>
         <version>4.0</version>
@@ -124,15 +134,6 @@
             <instance>default</instance>
         </interface>
         <fqname>@2.0::ILight/default</fqname>
-    </hal>
-    <hal format="hidl">
-        <name>android.hardware.soundtrigger</name>
-        <transport>hwbinder</transport>
-        <version>2.2</version>
-        <interface>
-            <name>ISoundTriggerHw</name>
-            <instance>default</instance>
-        </interface>
     </hal>
     <hal format="hidl">
         <name>android.hardware.media.omx</name>
@@ -220,6 +221,16 @@
             <instance>default</instance>
         </interface>
         <fqname>@1.0::ISensors/default</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>android.hardware.soundtrigger</name>
+        <transport>hwbinder</transport>
+        <version>2.2</version>
+        <interface>
+            <name>ISoundTriggerHw</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@2.2::ISoundTriggerHw/default</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.tetheroffload.config</name>
@@ -467,15 +478,6 @@
         </interface>
         <fqname>@1.0::IAppConnector/default</fqname>
         <fqname>@1.0::IGPAppConnector/default</fqname>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.qti.hardware.fm</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IFmHci</name>
-            <instance>default</instance>
-        </interface>
     </hal>
     <hal format="hidl">
         <name>vendor.qti.hardware.radio.am</name>
@@ -736,15 +738,6 @@
             <instance>default</instance>
         </interface>
         <fqname>@1.0::IXiaomiFingerprint/default</fqname>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.xiaomi.hardware.motor</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IMotor</name>
-            <instance>default</instance>
-        </interface>
     </hal>
     <hal format="hidl">
         <name>vendor.xiaomi.hardware.mlipay</name>

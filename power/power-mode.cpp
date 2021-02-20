@@ -42,7 +42,7 @@ bool isDeviceSpecificModeSupported(Mode type, bool* _aidl_return) {
 bool setDeviceSpecificMode(Mode type, bool enabled) {
     switch (type) {
         case Mode::DOUBLE_TAP_TO_WAKE: {
-            int fd = open("/dev/input/event3", O_RDWR);
+            int fd = open("/dev/input/event4", O_RDWR);
             struct input_event ev;
             ev.type = EV_SYN;
             ev.code = SYN_CONFIG;

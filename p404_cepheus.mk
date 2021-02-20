@@ -13,26 +13,27 @@
 # limitations under the License.
 
 # Inherit from those products. Most specific first.
-$(call inherit-product, device/xiaomi/raphael/msmnile.mk)
+$(call inherit-product, device/xiaomi/cepheus/msmnile.mk)
 
-# Inherit some common 404 stuff.
+# Inherit some common 404 stuff
 $(call inherit-product, vendor/404/configs/common.mk)
 
 TARGET_BOOT_ANIMATION_RES := 1080
+
 TARGET_GAPPS_ARCH := arm64
 
 $(call inherit-product, vendor/google/pixel/config.mk)
 $(call inherit-product, vendor/google/gms/gapps.mk)
 
 # Device identifier. This must come after all inclusions.
-PRODUCT_NAME := p404_raphael
-PRODUCT_DEVICE := raphael
+PRODUCT_NAME := p404_cepheus
+PRODUCT_DEVICE := cepheus
 PRODUCT_BRAND := Xiaomi
-PRODUCT_MODEL := MI 9T Pro
+PRODUCT_MODEL := MI 9
 PRODUCT_MANUFACTURER := Xiaomi
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRODUCT_NAME="raphael" \
-    TARGET_DEVICE="raphael"
+    PRODUCT_NAME="cepheus" \
+    TARGET_DEVICE="cepheus"
 
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi

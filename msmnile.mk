@@ -26,7 +26,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
 
 # Get non-open-source specific aspects
-$(call inherit-product-if-exists, vendor/xiaomi/raphael/raphael-vendor.mk)
+$(call inherit-product-if-exists, vendor/xiaomi/cepheus/cepheus-vendor.mk)
 
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
@@ -52,10 +52,10 @@ PRODUCT_PACKAGES += \
 # Audio
 PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-service \
-    android.hardware.audio@6.0-impl:32 \
+    android.hardware.audio@6.0-impl \
     android.hardware.audio.effect@6.0-impl \
-    android.hardware.soundtrigger@2.2-impl \
     android.hardware.bluetooth.audio@2.0-impl \
+    android.hardware.soundtrigger@2.2-impl
 
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
@@ -109,6 +109,7 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
     vendor/qcom/opensource/audio-hal/primary-hal/configs/msmnile/audio_tuning_mixer_tavil.txt:$(TARGET_COPY_OUT_VENDOR)/etc/audio_tuning_mixer_tavil.txt \
+    vendor/qcom/opensource/audio-hal/primary-hal/configs/msmnile/mixer_paths_pahu.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_pahu.xml \
     vendor/qcom/opensource/audio-hal/primary-hal/configs/msmnile/graphite_ipc_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/graphite_ipc_platform_info.xml \
     vendor/qcom/opensource/audio-hal/primary-hal/configs/msmnile/sound_trigger_mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sound_trigger_mixer_paths.xml
 
@@ -160,16 +161,10 @@ PRODUCT_PACKAGES += \
 
 # Fingerprint
 PRODUCT_PACKAGES += \
-    vendor.lineage.biometrics.fingerprint.inscreen@1.0-service.xiaomi_raphael
+    vendor.lineage.biometrics.fingerprint.inscreen@1.0-service.xiaomi_cepheus
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml
-
-# FM
-PRODUCT_PACKAGES += \
-    FM2 \
-    libqcomfm_jni \
-    qcom.fmradio
 
 # Fstab
 PRODUCT_COPY_FILES += \
@@ -203,26 +198,16 @@ PRODUCT_PACKAGES += \
     android.hidl.manager@1.0 \
     android.hidl.manager@1.0.vendor
 
-# Signapk
-PRODUCT_HOST_PACKAGES += \
-    signapk
-
-# VNDK
-PRODUCT_PACKAGES += \
-    libstdc++.vendor \
-    vndk-sp \
-    com.android.vndk.current.on_vendor
-
-# HWBinder
-PRODUCT_PACKAGES += \
-    libhwbinder \
-    libhwbinder.vendor
-
 # Hotword Enrollment
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/hotword-hiddenapi-package-whitelist.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/hotword-hiddenapi-package-whitelist.xml \
     $(LOCAL_PATH)/permissions/privapp-permissions-hotword.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-hotword.xml \
     $(LOCAL_PATH)/permissions/com.android.hotwordenrollment.common.util.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/com.android.hotwordenrollment.common.util.xml
+
+# HWBinder
+PRODUCT_PACKAGES += \
+    libhwbinder \
+    libhwbinder.vendor
 
 # IFAA manager
 PRODUCT_PACKAGES += \
@@ -237,7 +222,6 @@ PRODUCT_PACKAGES += \
     init.qcom.rc \
     init.qcom.sh \
     init.qcom.usb.rc \
-    init.raphael.rc \
     init.safailnet.rc \
     init.target.rc \
     ueventd.qcom.rc
@@ -248,6 +232,14 @@ PRODUCT_PACKAGES += \
     IPACM_cfg.xml \
     libipanat \
     liboffloadhal
+
+# IR
+PRODUCT_PACKAGES += \
+    android.hardware.ir@1.0-impl \
+    android.hardware.ir@1.0-service
+
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.consumerir.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.consumerir.xml
 
 # IRSC
 PRODUCT_COPY_FILES += \
@@ -366,7 +358,7 @@ PRODUCT_PACKAGES += \
     android.hardware.power-impl
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/power/config/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml
+    $(LOCAL_PATH)/power/config/msmnile/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml
 
 # QMI
 PRODUCT_PACKAGES += \
@@ -406,7 +398,7 @@ PRODUCT_PACKAGES += \
 
 # Recovery
 PRODUCT_PACKAGES += \
-    librecovery_updater_raphael
+    librecovery_updater_cepheus
 
 # RenderScript
 PRODUCT_PACKAGES += \
@@ -425,6 +417,10 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.proximity.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.proximity.xml \
     frameworks/native/data/etc/android.hardware.sensor.stepcounter.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.stepcounter.xml \
     frameworks/native/data/etc/android.hardware.sensor.stepdetector.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.stepdetector.xml \
+
+# Signapk
+PRODUCT_HOST_PACKAGES += \
+    signapk
 
 # Telephony
 PRODUCT_PACKAGES += \
@@ -477,9 +473,15 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.vulkan.level-0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.level.xml \
     frameworks/native/data/etc/android.hardware.vulkan.version-1_1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.version.xml
 
-# Wallpapers
+# VNDK
 PRODUCT_PACKAGES += \
-    PixelLiveWallpaperPrebuilt
+    libstdc++.vendor \
+    vndk-sp \
+    com.android.vndk.current.on_vendor
+
+PRODUCT_COPY_FILES += \
+    prebuilts/vndk/v29/arm64/arch-arm64-armv8-a/shared/vndk-core/libprotobuf-cpp-full.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libprotobuf-cpp-full.so \
+    prebuilts/vndk/v29/arm64/arch-arm64-armv8-a/shared/vndk-core/libprotobuf-cpp-lite.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libprotobuf-cpp-lite.so
 
 # WiFi
 PRODUCT_PACKAGES += \

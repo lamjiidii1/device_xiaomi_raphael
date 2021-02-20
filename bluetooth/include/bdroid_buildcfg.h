@@ -42,7 +42,7 @@ typedef struct {
 } device_t;
 
 static const device_t devices[] = {
-    {"raphael", "Xiaomi Mi 9T Pro"},
+    {"cepheus", "Xiaomi Mi 9"},
 };
 
 static inline const char *BtmGetDefaultName()
